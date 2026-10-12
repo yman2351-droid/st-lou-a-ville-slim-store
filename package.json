@@ -1,0 +1,44 @@
+{
+  "name": "st-lou-a-ville-slim-store",
+  "version": "1.0.0",
+  "description": "An independent artist merchandise storefront.",
+  "packageManager": "bun@1.4.3",
+  "type": "module",
+  "main": "index.html",
+  "scripts": {
+    "start": "bun run src/server/index.ts",
+    "dev": "bun run src/server/dev.ts",
+    "bootstrap-admin": "bun run src/server/bootstrap.ts",
+    "build": "bun run typecheck && bun run --bun vite build",
+    "typecheck": "bun run --bun tsc --noEmit",
+    "test": "bun test",
+    "preview": "bun run src/server/index.ts"
+  },
+  "dependencies": {
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0"
+  },
+  "devDependencies": {
+    "@testing-library/react": "^16.3.3",
+    "@types/bun": "^1.4.2",
+    "@types/jsdom": "^30.0.0",
+    "@types/node": "^26.6.5",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.1.2",
+    "jsdom": "^30.1.2",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.4"
+  },
+  "engines": {
+    "bun": ">=1.4.0"
+  },
+  "keywords": [
+    "merchandise",
+    "ecommerce",
+    "content-creator",
+    "artist"
+  ],
+  "author": "Your Name",
+  "license": "MIT"
+}
