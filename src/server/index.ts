@@ -9,7 +9,7 @@ if (process.env.APP_ORIGIN) {
 }
 
 const databasePath = resolve(process.env.STORE_DB_PATH ?? './data/store.sqlite');
-const uploadDirectory = resolve('./public/uploads');
+const uploadDirectory = resolve(process.env.UPLOAD_DIR ?? './public/uploads');
 const database = openStoreDatabase(databasePath);
 const store = createStoreApi({
     database,
