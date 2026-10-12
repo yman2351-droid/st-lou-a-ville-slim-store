@@ -54,6 +54,7 @@ const ManagementDashboard: React.FC<ManagementDashboardProps> = ({ user, csrfTok
     const [inventory, setInventory] = useState<Record<string, string>>({});
     const [newProduct, setNewProduct] = useState({ name: '', description: '', price: '' });
     const [newUser, setNewUser] = useState({ email: '', password: '', role: 'manager' as UserRole });
+    const [temporaryPasswordVisible, setTemporaryPasswordVisible] = useState(false);
     const [announcementText, setAnnouncementText] = useState('');
     const [uploadingId, setUploadingId] = useState<string | null>(null);
     const [error, setError] = useState('');
@@ -276,6 +277,7 @@ const ManagementDashboard: React.FC<ManagementDashboardProps> = ({ user, csrfTok
         try {
             await apiRequest('/api/users', { method: 'POST', body: JSON.stringify(newUser) }, csrfToken);
             setNewUser({ email: '', password: '', role: 'manager' });
+            setTemporaryPasswordVisible(false);
             setNotice('Account created.');
             await loadTab();
         } catch (cause) {
@@ -418,7 +420,12 @@ const ManagementDashboard: React.FC<ManagementDashboardProps> = ({ user, csrfTok
                         <form className="management-form" onSubmit={event => void createUser(event)}>
                             <h3>Create an account</h3>
                             <label>Email<input required type="email" maxLength={254} value={newUser.email} onChange={event => setNewUser({ ...newUser, email: event.target.value })} /></label>
-                            <label>Temporary password (at least 12 characters)<input required type="password" minLength={12} autoComplete="new-password" value={newUser.password} onChange={event => setNewUser({ ...newUser, password: event.target.value })} /></label>
+                            <label>Temporary password (at least 12 characters)
+                                <span className="password-input-wrap">
+                                    <input id="temporary-password" required type={temporaryPasswordVisible ? 'text' : 'password'} minLength={12} autoComplete="new-password" value={newUser.password} onChange={event => setNewUser({ ...newUser, password: event.target.value })} />
+                                    <button className="password-visibility-toggle" type="button" aria-controls="temporary-password" aria-pressed={temporaryPasswordVisible} onClick={() => setTemporaryPasswordVisible(visible => !visible)}>{temporaryPasswordVisible ? 'Hide' : 'Show'}</button>
+                                </span>
+                            </label>
                             <label>Role<select value={newUser.role} onChange={event => setNewUser({ ...newUser, role: event.target.value as UserRole })}><option value="manager">Manager</option><option value="customer">Customer</option><option value="admin">Admin</option></select></label>
                             <button className="button button-dark" type="submit">CREATE ACCOUNT</button>
                         </form>

@@ -19,6 +19,7 @@ const AccountCenter: React.FC<AccountCenterProps> = ({ open, user, csrfToken, on
     const [dashboardOpen, setDashboardOpen] = useState(false);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [passwordVisible, setPasswordVisible] = useState(false);
     const [error, setError] = useState('');
     const [busy, setBusy] = useState(false);
 
@@ -26,6 +27,7 @@ const AccountCenter: React.FC<AccountCenterProps> = ({ open, user, csrfToken, on
         if (!open) {
             setError('');
             setPassword('');
+            setPasswordVisible(false);
             setDashboardOpen(false);
         }
     }, [open]);
@@ -101,7 +103,12 @@ const AccountCenter: React.FC<AccountCenterProps> = ({ open, user, csrfToken, on
                         </div>
                         <form className="management-form account-form" onSubmit={event => void submitAccount(event)}>
                             <label>Email<input type="email" required autoComplete="email" maxLength={254} value={email} onChange={event => setEmail(event.target.value)} /></label>
-                            <label>Password<input type="password" required autoComplete={mode === 'sign-in' ? 'current-password' : 'new-password'} minLength={mode === 'create-account' ? 12 : undefined} maxLength={256} value={password} onChange={event => setPassword(event.target.value)} /></label>
+                            <label>Password
+                                <span className="password-input-wrap">
+                                    <input id="account-password" type={passwordVisible ? 'text' : 'password'} required autoComplete={mode === 'sign-in' ? 'current-password' : 'new-password'} minLength={mode === 'create-account' ? 12 : undefined} maxLength={256} value={password} onChange={event => setPassword(event.target.value)} />
+                                    <button className="password-visibility-toggle" type="button" aria-controls="account-password" aria-pressed={passwordVisible} onClick={() => setPasswordVisible(visible => !visible)}>{passwordVisible ? 'Hide' : 'Show'}</button>
+                                </span>
+                            </label>
                             {mode === 'create-account' && <p>New accounts are customers. An admin must assign staff roles.</p>}
                             <button className="button button-dark" type="submit" disabled={busy}>{busy ? 'PLEASE WAIT…' : mode === 'sign-in' ? 'SIGN IN' : 'CREATE CUSTOMER ACCOUNT'}</button>
                         </form>

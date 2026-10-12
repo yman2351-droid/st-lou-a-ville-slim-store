@@ -302,6 +302,10 @@ button { color: inherit; }
 .management-form input, .management-form textarea, .management-form select, .inventory-form input, .managed-order select, .managed-user select { width: 100%; min-height: 38px; padding: 9px 10px; border: 1px solid #4a4c50; border-radius: 0; background: #101113; color: var(--ink); font: 11px var(--sans); text-transform: none; }
 .management-form textarea { min-height: 82px; resize: vertical; line-height: 1.6; }
 .management-form input[type="file"] { padding: 6px; }
+.password-input-wrap { display: flex; }
+.management-form .password-input-wrap input { min-width: 0; flex: 1; }
+.password-visibility-toggle { min-width: 58px; padding: 0 11px; border: 1px solid #4a4c50; border-left: 0; background: #252629; color: var(--ink); cursor: pointer; font-size: 9px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+.password-visibility-toggle:focus-visible { position: relative; outline: 2px solid var(--accent); outline-offset: 2px; }
 .management-form p { margin: 0; color: var(--muted); font-size: 10px; line-height: 1.7; }
 .management-form .button { justify-self: start; }
 .account-form { border: 0; padding: 6px 0 0; background: transparent; }
